@@ -6,15 +6,25 @@ get '/' do
 end 
 
 post '/landing' do 
-    username = params[:username]
-    password = params[:password]
-    redirect '/user_login?username=' + username + '&password=' + password 
+    landing_choice = params[:landing_choice]
+    if landing_choice == "Login"
+        redirect '/user_login'
+    else 
+        redirect '/create'
+    end
+end 
+
+get '/create' do 
+    erb :create 
+end 
+
+post '/create' do 
+    
+    redirect '/user_login'
 end 
 
 get '/user_login' do
-    username = params[:username]
-    password = params[:password]
-    erb :user_login, locals: {username: username, password: password}
+    erb :user_login
 end 
 
 post '/user_login' do 
